@@ -11,17 +11,17 @@ const tab = ref<'overview' | 'videos' | 'photos'>('overview')
 
 <template>
   <div flex items-center justify-center gap8 py6>
-    <button n-tab :class="{ 'n-tab-active': tab === 'overview' }" @click="tab = 'overview'">
+    <!-- <button n-tab :class="{ 'n-tab-active': tab === 'overview' }" @click="tab = 'overview'">
       {{ $t('Overview') }}
-    </button>
-    <button n-tab :class="{ 'n-tab-active': tab === 'videos' }" @click="tab = 'videos'">
+    </button> -->
+    <!-- <button n-tab :class="{ 'n-tab-active': tab === 'videos' }" @click="tab = 'videos'">
       {{ $t('Videos') }}
     </button>
     <button n-tab :class="{ 'n-tab-active': tab === 'photos' }" @click="tab = 'photos'">
       {{ $t('Media Photos') }}
-    </button>
+    </button> -->
   </div>
   <MediaOverview v-if="tab === 'overview'" :item="item" :type="type" />
-  <MediaVideos v-if="tab === 'videos'" :item="item" />
-  <MediaPhotos v-if="tab === 'photos'" :item="item" />
+  <!-- <MediaVideos v-if="tab === 'videos'" :item="item" />
+  <MediaPhotos v-if="tab === 'photos'" :item="item" /> -->
 </template>

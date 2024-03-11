@@ -26,11 +26,19 @@ const mounted = useMounted()
       lt-lg="left-0"
       lg="bottom-0 left-1/3"
     >
-      <NuxtImg
+      <!-- <NuxtImg
         width="1220"
         height="659"
         format="webp"
         :src="`/tmdb${props.item.backdrop_path}`"
+        :alt="props.item.title || props.item.name"
+        h-full w-full object-cover
+      /> -->
+       <NuxtImg
+        width="1220"
+        height="659"
+        format="webp"
+        src="https://slejxescefgokkervtgb.supabase.co/storage/v1/object/public/aihaipublic/destinationimages/kenya.jpg"
         :alt="props.item.title || props.item.name"
         h-full w-full object-cover
       />
@@ -42,7 +50,7 @@ const mounted = useMounted()
       lg="px25 w-2/3 bg-gradient-to-r"
       from-black via-black to-transparent
     >
-      <Transition appear name="hero">
+       <Transition appear name="hero">
         <div v-show="mounted">
           <h1 mt-2 text-4xl lg:text-5xl line-clamp-2>
             {{ props.item.title || props.item.name }}
@@ -72,11 +80,11 @@ const mounted = useMounted()
             <button
               flex="~ gap2" items-center p="x6 y3"
               bg="gray/15 hover:gray/20" transition
-              :title="$t('Watch Trailer')"
-              @click="playTrailer()"
+              :title="$t('Coming Soon')"
+             
             >
               <div i-ph-play />
-              {{ $t('Watch Trailer') }}
+              {{ $t('Coming Soon') }}
             </button>
           </div>
         </div>

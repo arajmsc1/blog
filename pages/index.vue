@@ -8,6 +8,7 @@ const type = computed(() => route.params.type as MediaType || 'movie')
 const queries = computed(() => [
   QUERY_LIST.movie[0],
   QUERY_LIST.tv[0],
+   QUERY_LIST.tv2[0],
 ])
 
 const AsyncWrapper = defineComponent({
@@ -23,9 +24,10 @@ const AsyncWrapper = defineComponent({
 <template>
   <div>
     <AsyncWrapper v-slot="{ item }">
-      <NuxtLink :to="`/${type}/${item.id}`">
+       <MediaHero :item="item" />
+      <!-- <NuxtLink :to="`/${type}/${item.id}`">
         <MediaHero :item="item" />
-      </NuxtLink>
+      </NuxtLink> -->
     </AsyncWrapper>
     <CarouselAutoQuery
       v-for="query of queries"

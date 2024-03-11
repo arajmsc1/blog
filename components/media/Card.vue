@@ -8,9 +8,14 @@ defineProps<{
 </script>
 
 <template>
+
+  <!-- <NuxtLink
+    :to="`/${item.media_type || type}/${item.id}`" pb2
+  > -->
   <NuxtLink
     :to="`/${item.media_type || type}/${item.id}`" pb2
-  >
+  > 
+   
     <div
       block bg-gray4:10 p1
       class="aspect-10/16"
@@ -18,11 +23,11 @@ defineProps<{
       hover="scale-105 z10"
     >
       <NuxtImg
-        v-if="item.poster_path"
+        v-if="item.featureimage"
         width="400"
         height="600"
         format="webp"
-        :src="`/tmdb${item.poster_path}`"
+        :src="item.featureimage"
         :alt="item.title || item.name"
         w-full h-full object-cover
         :style="{ 'view-transition-name': `item-${item.id}` }"
@@ -32,13 +37,13 @@ defineProps<{
       </div>
     </div>
     <div mt-2>
-      {{ item.title || item.name }}
+      {{ item.title_post  }}
     </div>
-    <div flex text-sm gap-2 items-center>
+    <!-- <div flex text-sm gap-2 items-center>
       <StarsRate w-20 :value="item.vote_average" />
       <div op60>
         {{ formatVote(item.vote_average) }}
       </div>
-    </div>
+    </div> -->
   </NuxtLink>
 </template>
