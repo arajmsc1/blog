@@ -36,7 +36,7 @@ const{data:item} =await useFetch(apiurl+'/blogposts'+'/1?destination='+props.que
       v-for="i of item?.results || []"
       :key="i.location_id"
       :item="i"
-      :type="props.query.type"
+      type="detail"
       flex-1 w-40 md:w-60
     />
   </CarouselBase>

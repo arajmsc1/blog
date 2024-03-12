@@ -4,7 +4,7 @@ import { formatDate, formatLang, formatTime, numberWithCommas } from '~/composab
 
 const props = withDefaults(defineProps<{
   item: Media
-  type: MediaType
+  //type: MediaType
 }>(), {
   item: () => ({} as Media),
   type: 'movie',
@@ -16,35 +16,47 @@ const directors = computed(() => props.item.credits?.crew.filter(person => perso
 
 <template>
   <div p4 grid="~ cols-[max-content_1fr]" gap-8 items-center ma max-w-300>
+    <!-- <NuxtImg
+      width="400"
+      height="600"
+      format="webp"
+      :src="`/tmdb${props.item.image}`"
+      :alt="props.item.title || props.item.name"
+      block border="4 gray4/10" w-79 lt-md:hidden
+      transition duration-400 object-cover aspect="10/16"
+      :style="{ 'view-transition-name': `item-${props.item.id}` }"
+    /> -->
     <NuxtImg
       width="400"
       height="600"
       format="webp"
-      :src="`/tmdb${props.item.poster_path}`"
+      :src="props.item.featureimage"
       :alt="props.item.title || props.item.name"
       block border="4 gray4/10" w-79 lt-md:hidden
       transition duration-400 object-cover aspect="10/16"
       :style="{ 'view-transition-name': `item-${props.item.id}` }"
     />
     <div lt-md:w="[calc(100vw-2rem)]" flex="~ col" md:p4 gap6>
-      <div v-if="props.item.overview">
+      <!-- <div v-if="props.item.overview"> -->
+        <div>
         <h2 text-3xl mb4>
-          {{ $t('Storyline') }}
+          Storyline
         </h2>
-        <div op80 v-text="props.item.overview" />
+        <div op80 v-text="props.item.post_content" />
       </div>
 
       <div text-sm op80>
         <ul grid="~ cols-[max-content_1fr] lg:cols-[max-content_1fr_max-content_1fr] gap3" items-center>
-          <template v-if="props.item.release_date">
+          <!-- <template v-if="props.item.release_date"> -->
+            <!-- <template >
             <div>
               {{ $t('Release Date') }}
             </div>
             <div>
               {{ formatDate(props.item.release_date) }}
-            </div>
-          </template>
-          <template v-if="props.item.runtime">
+            </div> 
+          </template> -->
+          <!-- <template v-if="props.item.runtime">
             <div>
               {{ $t('Runtime') }}
             </div>
@@ -52,8 +64,8 @@ const directors = computed(() => props.item.credits?.crew.filter(person => perso
             <div>
               {{ formatTime(props.item.runtime) }}
             </div>
-          </template>
-          <template v-if="directors?.length">
+          </template> -->
+          <!-- <template v-if="directors?.length">
             <div>
               {{ $t('Director') }}
             </div>
@@ -78,8 +90,26 @@ const directors = computed(() => props.item.credits?.crew.filter(person => perso
             <div>
               ${{ numberWithCommas(props.item.budget) }}
             </div>
+          </template> -->
+          <template >
+            <div>
+              Location
+            </div>
+
+            <div>
+             {{props.item.name}} ({{props.item.parent}})
+            </div>
           </template>
-          <template v-if="props.item.revenue">
+           <template >
+            <div>
+              Type
+            </div>
+
+            <div>
+             {{props.item.targetusersegment_value}} 
+            </div>
+          </template>
+          <!-- <template v-if="props.item.revenue">
             <div>
               {{ $t('Revenue') }}
             </div>
@@ -91,7 +121,7 @@ const directors = computed(() => props.item.credits?.crew.filter(person => perso
           <template v-if="props.item?.genres?.length">
             <div>
               {{ $t('Genre') }}
-            </div>
+            </div> 
 
             <div flex="~ row wrap gap1">
               <NuxtLink
@@ -130,7 +160,7 @@ const directors = computed(() => props.item.credits?.crew.filter(person => perso
             <div>
               {{ props.item.production_companies.map(i => i.name).join(', ') }}
             </div>
-          </template>
+          </template>-->
         </ul>
       </div>
 

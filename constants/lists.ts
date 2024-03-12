@@ -1,5 +1,5 @@
 import type { QueryItem } from '~/types'
-export const apiurl= "https://csurzf-ip-183-82-177-250.tunnelmole.net"
+export const apiurl= "https://3bhqyy-ip-183-82-177-163.tunnelmole.net"
 export const QUERY_LIST = {
   movie: <QueryItem[]>([
     { type: 'movie', title: 'Kenya', query: 'popular' },

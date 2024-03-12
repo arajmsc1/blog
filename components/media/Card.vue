@@ -5,6 +5,10 @@ defineProps<{
   type: MediaType
   item: Media
 }>()
+function test()
+{
+  alert('ggg')
+}
 </script>
 
 <template>
@@ -13,7 +17,7 @@ defineProps<{
     :to="`/${item.media_type || type}/${item.id}`" pb2
   > -->
   <NuxtLink
-    :to="`/${item.media_type || type}/${item.id}`" pb2
+    :to="`/${item.media_type || type}/${item.title_url||item.title_post}`"   pb2
   > 
    
     <div

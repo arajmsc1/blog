@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
 //     showModal(trailer.value)
 // }
 
-const mounted = useMounted()
+//const mounted = useMounted()
 </script>
 
 <template>
@@ -39,7 +39,7 @@ const mounted = useMounted()
         height="659"
         format="webp"
         src="https://slejxescefgokkervtgb.supabase.co/storage/v1/object/public/aihaipublic/destinationimages/kenya.jpg"
-        :alt="props.item.title_post || props.item.name"
+        :alt="props.item.title || props.item.name"
         h-full w-full object-cover
       />
     </div>
@@ -51,19 +51,18 @@ const mounted = useMounted()
       from-black via-black to-transparent
     >
        <Transition appear name="hero">
-        <!-- <div v-show="mounted"> -->
-          <div>
+        <div v-show="mounted">
           <h1 mt-2 text-4xl lg:text-5xl line-clamp-2>
             {{ item.title_post || props.item.name }}
           </h1>
           <div flex="~ row wrap" gap2 items-center mt4>
-            <StarsRate w-25 :value="props.item.rating" />
+            <StarsRate w-25 :value="props.item.vote_average" />
             <div class="op50 hidden md:block">
-              {{ formatVote(props.item.rating) }}
+              {{ formatVote(props.item.vote_average) }}
             </div>
             <span class="op50 hidden md:block">·</span>
             <div class="op50 hidden md:block">
-              {{ $t('{numberOfReviews} Reviews', { numberOfReviews: formatVote(props.item.rating) }) }}
+              {{ $t('{numberOfReviews} Reviews', { numberOfReviews: formatVote(props.item.vote_count) }) }}
             </div>
             <span op50>·</span>
             <div v-if="props.item.release_date" op50>
@@ -77,16 +76,15 @@ const mounted = useMounted()
           <p class="mt-2 op80 leading-relaxed of-hidden line-clamp-3 md:line-clamp-5 text-xs md:text-base">
             {{ props.item.overview }}
           </p>
-          <!-- <div v-if="trailer" class="py5 display-none lg:block"> -->
-            <div  class="py5 display-none lg:block">
+          <div v-if="trailer" class="py5 display-none lg:block">
             <button
               flex="~ gap2" items-center p="x6 y3"
               bg="gray/15 hover:gray/20" transition
-              title="Coming Soon"
+              :title="$t('Coming Soon')"
              
             >
               <div i-ph-play />
-              Coming Soon 
+              {{ $t('Coming Soon') }}
             </button>
           </div>
         </div>

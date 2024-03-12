@@ -3,9 +3,9 @@ import type { Media, MediaType } from '~/types'
 
 defineProps<{
   item: Media
-  type: MediaType
+  //type: MediaType
 }>()
-
+const type='type'
 const tab = ref<'overview' | 'videos' | 'photos'>('overview')
 </script>
 

@@ -2,8 +2,8 @@ import { useSingleton } from './utils'
 import type { Image, Media, Video } from '~/types'
 
 export function getTrailer(item: Media) {
-  const trailer = item.videos?.results?.find(video => video.type === 'Trailer')
-  return getVideoLink(trailer)
+  //const trailer = item.videos?.results?.find(video => video.type === 'Trailer')
+  //return getVideoLink(trailer)
 }
 
 export function getVideoLink(item?: Video) {
