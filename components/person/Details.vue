@@ -10,7 +10,7 @@ const tab = ref<'known' | 'credits' | 'photos'>('known')
 
 <template>
   <PersonInfo :item="item" />
-  <div flex items-center justify-center gap8 py6>
+   <div flex items-center justify-center gap8 py6>
     <button n-tab :class="{ 'n-tab-active': tab === 'known' }" @click="tab = 'known'">
       {{ $t('Known For') }}
     </button>
@@ -34,5 +34,5 @@ const tab = ref<'known' | 'credits' | 'photos'>('known')
     </template>
   </MediaGrid>
   <PersonCredits v-if="tab === 'credits'" :item="item" />
-  <PersonPhotos v-if="tab === 'photos'" :item="item" />
+  <PersonPhotos v-if="tab === 'photos'" :item="item" /> 
 </template>

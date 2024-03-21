@@ -9,6 +9,12 @@ const showModal = useIframeModal()
 function play() {
   return showModal(getVideoLink(props.item)!)
 }
+// function play() {
+//   const itemkey='9H_TJM146HM';
+//   const vURL=`https://www.youtube.com/embed/${itemkey}?rel=0&showinfo=0&autoplay=0`
+//   return showModal(vURL)
+//   //return showModal('https://youtu.be/9H_TJM146HM?rel=0&showinfo=0&autoplay=0')
+// }
 </script>
 
 <template>
@@ -20,19 +26,27 @@ function play() {
       hover="scale-102 z10"
     >
       <NuxtImg
-        :src="`/youtube/vi/${item.key}/maxresdefault.jpg`"
+        :src="props.item.contenturl"
         width="400"
         height="600"
         format="webp"
         :alt="props.item.name"
         w-full h-full object-cover
       />
+      <!-- <NuxtImg
+        :src="`/youtube/vi/${item.key}/maxresdefault.jpg`"
+        width="400"
+        height="600"
+        format="webp"
+        :alt="props.item.name"
+        w-full h-full object-cover
+      /> -->
       <div flex w-full h-full absolute inset-0 op20 hover:op100 transition>
         <div i-ph-play ma text-3xl />
       </div>
     </div>
     <div mt-2>
-      {{ props.item.name }}
+      {{ props.item.contenturl }}
     </div>
     <div op60 text-sm>
       {{ props.item.type }}

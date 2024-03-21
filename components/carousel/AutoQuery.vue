@@ -13,7 +13,7 @@ const{data:item} =await useFetch(apiurl+'/blogposts'+'/1?destination='+props.que
 <template>
   <CarouselBase>
     <template #title>
-      {{ $t(query.title) }}
+      <NuxtLink :to="`/country/${query.title}`">{{ $t(query.title) }} </NuxtLink>
     </template>
     <!-- <template #more>
       <NuxtLink :to="`/${props.query.type}/category/${props.query.query}`" n-link>

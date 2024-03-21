@@ -10,8 +10,16 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@unocss/nuxt',
     '@nuxt/image',
-    '@nuxtjs/i18n',
+    '@nuxtjs/i18n',    
+    'nuxt-vue3-google-signin',    
+    
   ],
+  runtimeConfig:{
+    googleClientID:process.env.GOOGLE_CLIENT_ID,
+  },
+  googleSignIn: {
+    clientId: process.env.GOOGLE_CLIENT_ID,
+  },
   experimental: {
     inlineSSRStyles: false,
     viewTransition: true,

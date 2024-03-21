@@ -7,9 +7,9 @@ export function getTrailer(item: Media) {
 }
 
 export function getVideoLink(item?: Video) {
-  if (!item?.key)
-    return null
-  return `https://www.youtube.com/embed/${item.key}?rel=0&showinfo=0&autoplay=0`
+  if (!item?.media_key)
+    return null    
+  return `https://www.youtube.com/embed/${item.media_key}?rel=0&showinfo=0&autoplay=0`
 }
 
 const [
