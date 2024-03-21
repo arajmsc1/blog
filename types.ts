@@ -77,6 +77,7 @@ export interface Video {
   iso_3166_1: string
   name: string
   key: string
+  media_key: string
   site: string
   size: number
   type: string
@@ -90,6 +91,7 @@ export interface Image {
   height: number
   iso_639_1: string
   file_path: string
+  contenturl: string
   vote_average: number
   vote_count: number
   width: number

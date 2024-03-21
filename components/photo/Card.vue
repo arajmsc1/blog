@@ -7,6 +7,7 @@ const props = defineProps<{
 </script>
 
 <template>
+<!-- {{item}} -->
   <button
     text-left block
     bg-gray4:10 transition
@@ -17,9 +18,17 @@ const props = defineProps<{
       width="400"
       height="600"
       format="webp"
-      :src="`/tmdb${props.item.file_path}`"
+      :src="props.item.contenturl || props.item.guideimage"
       alt="Photo"
       w-full h-full object-cover
     />
+    <!-- <NuxtImg
+      width="400"
+      height="600"
+      format="webp"
+      :src="`/tmdb${props.item.file_path}`"
+      alt="Photo"
+      w-full h-full object-cover
+    /> -->
   </button>
 </template>
