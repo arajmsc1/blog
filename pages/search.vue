@@ -7,66 +7,57 @@ definePageMeta({
 
 const route = useRoute()
 const router = useRouter()
-const input = ref((route.query.s || '').toString())
-const error = ref<unknown>()
-const count = ref<undefined | number>()
+//const searchMonth = localStorage.getItem('searchMonth') ? localStorage.getItem('searchMonth'):false;
+//console.log(searchMonth)
+function getNextTwoYearsMonths() {
+    const currentDate = new Date();
+    const nextTwoYearsMonths = {};
 
-const items = ref<Media[]>([])
-const currentSearch = ref(input.value)
+    for (let i = 0; i < 24; i++) {
+        const year = currentDate.getFullYear() + Math.floor((currentDate.getMonth() + i) / 12);
+        const monthIndex = (currentDate.getMonth() + i) % 12;
+        const monthName = new Date(0, monthIndex).toLocaleString('default', { month: 'long' });
 
-function search() {
-  if (currentSearch.value === input.value)
-    return
+        if (!nextTwoYearsMonths[year]) {
+            nextTwoYearsMonths[year] = [];
+        }
 
-  currentSearch.value = input.value.toString()
-  count.value = undefined
-  items.value = []
-  router.replace({ query: { s: input.value } })
+        nextTwoYearsMonths[year].push(monthName);
+    }
+
+    return nextTwoYearsMonths;
 }
 
-async function fetch(page: number) {
-  if (!currentSearch.value)
-    return
-  try {
-    const data = await searchShows(currentSearch.value, page)
-    count.value = data.total_results ?? count.value
-    items.value.push(...data.results)
-  }
-  catch (e: any) {
-    error.value = e
-  }
-}
-
-const throttledSearch = useDebounceFn(search, 200)
-
-const vFocus = {
-  mounted: (el: HTMLElement) => el.focus(),
-}
-
-useHead({
-  title: computed(() => `Search: ${currentSearch.value}`),
-})
-
-watch(
-  () => input.value,
-  () => throttledSearch(),
-)
+const twoyearData = getNextTwoYearsMonths();
 </script>
 
 <template>
+<!-- {{twoyearData}} -->
   <div>
     <div flex bg-gray:10 items-center px6 py4 gap3 sticky>
-      <div i-ph:magnifying-glass text-xl op50 />
-      <input
-        v-model="input"
-        v-focus
-        type="text"
-        text-2xl bg-transparent outline-none w-full
-        :placeholder="$t('Type to search...')"
-        @keyup.enter="search"
-      >
+      <div i-ph: text-xl op50 />
+      Please click on the Month
+      
     </div>
-    <div v-if="error" p8 flex flex-col gap-3 items-start>
+
+    <div>
+    <div v-for="(months, year) in twoyearData" :key="year">
+      <h1 class="year">{{ year }}</h1>
+      <div class="card-container">
+
+        <!-- <div v-for="month in months" :key="month" :class="!searchMonth ? card : cardSelected">  
+          <div v-for="month in months" :key="month" :class="!searchMonth ? card : cardSelected"> -->
+        <div v-for="month in months" :key="month"  class="card">  
+         <NuxtLink :to="`/searchCountry/${month}::${year}`">
+           <div class="card-content">
+            {{ month }}
+          </div>
+         </NuxtLink>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- <div v-if="error" p8 flex flex-col gap-3 items-start>
       <h1 text-4xl text-red>
         {{ $t('Error occurred on fetching') }}
       </h1>
@@ -88,6 +79,48 @@ watch(
     </MediaAutoLoadGrid>
     <div v-else text-4xl p10 font-100 op50 text-center>
       {{ $t('Type something to search...') }}
-    </div>
+    </div> -->
   </div>
 </template>
+
+<style scoped>
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left:15px;
+  
+}
+
+.card {
+  width: calc(12% - 8px); /* Adjust card width as needed */
+  margin: 8px;
+  background-color: #383838;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  
+}
+
+.card-content {
+  padding: 10px;
+  text-align: center;
+}
+.cardSelected{
+  width: calc(12% - 8px); /* Adjust card width as needed */
+  margin: 8px;
+  background-color: #f0e006;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  
+}
+
+.card-content {
+  padding: 10px;
+  text-align: center;
+}
+.year{
+text-align: center;
+font-size: 20px;
+font-weight: bold;
+padding: 5px;
+}
+</style>

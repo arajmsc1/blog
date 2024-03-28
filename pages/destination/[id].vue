@@ -2,9 +2,9 @@
  <!-- {{item.destination}} -->
      <div>
     <MediaHero :item="item.destination" />
-    <MediaDetails :item="item.destination" :page="pagename" :photos="item.photos" :videos="item.videos"/>
+     <MediaDetails :item="item.destination" :page="pagename" :photos="item.photos" :videos="item.videos"/>
     
-     <CarouselBase v-if="item.guides?.length">
+    <CarouselBase v-if="item.guides?.length">
       <template #title >
         Guides
       </template>

@@ -14,6 +14,7 @@
   "dependencies": {
     "axios": "^1.6.7",
     "google-auth-library": "^9.7.0",
+    "marked": "^12.0.1",
     "nuxt-vue3-google-signin": "^0.0.11",
     "vue-router-better-scroller": "^0.0.0",
     "vue3-google-signin": "^1.3.5"
@@ -25,6 +26,7 @@
     "@iconify-json/ph": "^1.1.8",
     "@iconify-json/simple-icons": "^1.1.82",
     "@iconify-json/twemoji": "^1.1.14",
+    "@nuxt/content": "npm:@nuxt/content-edge@latest",
     "@nuxt/devtools": "^1.0.4",
     "@nuxt/image": "^1.1.0",
     "@nuxtjs/color-mode": "^3.3.2",

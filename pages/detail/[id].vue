@@ -1,7 +1,7 @@
 <template>
 <!-- {{item.relatedPosts}} -->
     <div>
-    <MediaHero :item="item.singlePost" />
+    <MediaHero :item="item.singlePost" page="detail"/>
       <MediaDetails :item="item.singlePost"  />
     
    <CarouselBase v-if="item.relatedPosts?.length">

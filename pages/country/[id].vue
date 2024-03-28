@@ -1,10 +1,10 @@
 <template>
-<!-- {{pagename}} {{item.country}} -->
+ <!-- {{item.photos}} -->
      <div>
-    <MediaHero :item="item.country" />
-    <MediaDetails :item="item.country" :page="pagename" :photos="item.photos" :videos="item.videos"/>
+    <MediaHero :item="item.country" page="country"/>
+   <MediaDetails :item="item.country" :page="pagename" :photos="item.photos" :videos="item.videos"/>
     
-     <CarouselBase v-if="item.destinations?.length">
+      <CarouselBase v-if="item.destinations?.length">
       <template #title v-if='pagename=="country"' >
         Destinations
       </template>

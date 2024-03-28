@@ -11,9 +11,14 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@nuxt/image',
     '@nuxtjs/i18n',    
-    'nuxt-vue3-google-signin',    
+    'nuxt-vue3-google-signin', 
+    '@nuxt/content',
     
   ],
+  alias: {
+    "micromark/lib/preprocess.js": "micromark",
+    "micromark/lib/postprocess.js": "micromark",
+  },
   runtimeConfig:{
     googleClientID:process.env.GOOGLE_CLIENT_ID,
   },

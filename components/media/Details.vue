@@ -12,7 +12,7 @@ const tab = ref<'overview' | 'videos' | 'photos'>('overview')
 </script>
 
 <template>
-  <div v-if='page=="country"' flex items-center justify-center gap8 py6>
+  <div v-if='page=="country"' flex items-center justify-center gap8 py6 pt20>
      <button n-tab :class="{ 'n-tab-active': tab === 'overview' }" @click="tab = 'overview'">
       {{ $t('Overview') }}
     </button> 
@@ -23,7 +23,9 @@ const tab = ref<'overview' | 'videos' | 'photos'>('overview')
       {{ $t('Media Photos') }}
     </button> 
   </div>
-  <MediaOverview v-if="tab === 'overview'" :item="item" :type="type" />
-  <MediaVideos v-if="tab === 'videos'" :item="videos" />
+  <div v-else flex items-center justify-center gap8 py6 pt20>
+  </div>
+   <MediaOverview v-if="tab === 'overview'" :item="item" :type="type" />
+ <MediaVideos v-if="tab === 'videos'" :item="videos" />
   <MediaPhotos v-if="tab === 'photos'" :item="photos" /> 
 </template>

@@ -15,7 +15,14 @@ const AsyncWrapper = defineComponent({
   name: 'AsyncWrapper',
   async setup(_, ctx) {
     const list = await listMedia(type.value, queries.value[0].query, 1)
-    const item = await getMedia(type.value, list.results[0].id)
+    //const item = await getMedia(type.value, list.results[0].id)
+    const item={
+      'overview':'World life encompasses the diverse range of experiences, interactions, and phenomena occurring on Earth, encompassing ecosystems, cultures, societies, and the interconnectedness of all living beings within the biosphere.',
+      'title_post':'Exploring the Tapestry of World Life',
+      'countries_count':'20',
+      'destination_count':'50',
+      'guide_count':'10'
+    }
     return () => ctx.slots?.default?.({ item })
   },
 })
@@ -23,8 +30,9 @@ const AsyncWrapper = defineComponent({
 
 <template>
   <div>
+    {{item}}
     <AsyncWrapper v-slot="{ item }">
-       <MediaHero :item="item" />
+       <MediaHero :item="item" page="home"/>
       <!-- <NuxtLink :to="`/${type}/${item.id}`">
         <MediaHero :item="item" />
       </NuxtLink> -->
