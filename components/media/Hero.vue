@@ -3,7 +3,8 @@ import type { Media } from '~/types'
 import { formatTime } from '~/composables/utils'
 
 const props = withDefaults(defineProps<{
-  item: Media
+  item: Media,
+  page:String
 }>(), {
   item: () => ({} as Media),
 })
@@ -20,6 +21,7 @@ const mounted = useMounted()
 </script>
 
 <template>
+<!-- {{props.page}} -->
   <div :key="item.location_id" relative class="aspect-ratio-3/2 lg:aspect-ratio-25/9" bg-black>
     <div
       absolute top-0 right-0
@@ -38,7 +40,7 @@ const mounted = useMounted()
         width="1220"
         height="659"
         format="webp"
-        src="https://slejxescefgokkervtgb.supabase.co/storage/v1/object/public/aihaipublic/destinationimages/kenya.jpg"
+        :src="props.item.banner_image || 'https://slejxescefgokkervtgb.supabase.co/storage/v1/object/public/aihaipublic/destinationimages/kenya.jpg'"
         :alt="props.item.title_post || props.item.name"
         h-full w-full object-cover
       />
@@ -57,28 +59,43 @@ const mounted = useMounted()
             {{ item.title_post || props.item.name }}
           </h1>
           <div flex="~ row wrap" gap2 items-center mt4>
-            <StarsRate w-25 :value="props.item.rating" />
-            <div class="op50 hidden md:block">
+            <StarsRate v-if="props.page!='home'" w-25 :value="props.item.rating" /> 
+            <div v-if="props.page!='home'" class="op50 hidden md:block">
               {{ formatVote(props.item.rating) }}
             </div>
-            <span class="op50 hidden md:block">·</span>
+            <span class="op50 hidden md:block" v-if="props.page!='home'">·</span>
+           <template v-if="props.page!='home'">
             <div class="op50 hidden md:block">
-              {{ $t('{numberOfReviews} Reviews', { numberOfReviews: formatVote(props.item.rating) }) }}
+              {{props.item.comment_count}}  Comments
             </div>
             <span op50>·</span>
-            <div v-if="props.item.release_date" op50>
-              {{ props.item.release_date.slice(0, 4) }}
+            <div  op50>
+              {{formatVote(props.item.views_count)}} Views
             </div>
             <span op50>·</span>
-            <div v-if="props.item.runtime" op50>
-              {{ formatTime(props.item.runtime) }}
+            <div  op50>
+              1 min
             </div>
+            </template>
+            <template v-else>
+            <div class="op50 hidden md:block">
+              {{props.item.countries_count}}  Countries
+            </div>
+            <span op50>·</span>
+            <div  op50>
+              {{formatVote(props.item.destination_count)}} Destinations
+            </div>
+            <span op50>·</span>
+            <div  op50>
+              {{props.item.guide_count}} Guides
+            </div>
+            </template>
           </div>
           <p class="mt-2 op80 leading-relaxed of-hidden line-clamp-3 md:line-clamp-5 text-xs md:text-base">
-            {{ props.item.overview }}
+            {{ props.item.overview || props.item.post_short_description || props.item.briefdescription }}
           </p>
           <!-- <div v-if="trailer" class="py5 display-none lg:block"> -->
-            <div  class="py5 display-none lg:block">
+            <div v-if="props.page=='home'" class="py5 display-none lg:block">
             <button
               flex="~ gap2" items-center p="x6 y3"
               bg="gray/15 hover:gray/20" transition
@@ -86,7 +103,7 @@ const mounted = useMounted()
              
             >
               <div i-ph-play />
-              Coming Soon 
+              Coming Soon
             </button>
           </div>
         </div>

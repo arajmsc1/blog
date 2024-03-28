@@ -1,4 +1,6 @@
 <script setup lang="ts">
+//import { ref, watch } from 'vue'
+//import marked from 'marked'
 import type { Media, MediaType } from '~/types'
 import { formatDate, formatLang, formatTime, numberWithCommas } from '~/composables/utils'
 
@@ -9,13 +11,40 @@ const props = withDefaults(defineProps<{
   item: () => ({} as Media),
   type: 'movie',
 })
-
 const externalIds = computed(() => ({ ...props.item.external_ids, homepage: props.item.homepage }))
 const directors = computed(() => props.item.credits?.crew.filter(person => person.job === 'Director'))
+
+ let renderedMarkdown = ref('')
+// const markdownContent = ref('')
+// // Watch for changes in the prop
+// watch(() => props.item.post_content, (newVal) => {
+//   markdownContent.value = newVal.markdownContent
+// })
+
+// // Render Markdown content
+// watch(markdownContent, (newVal) => {
+//   renderedMarkdown.value = marked(newVal)
+// })
+
+
+// watch(markdownContent, () => {
+//   renderedMarkdown.value = marked(markdownContent)
+// })
+
+
+  let contents= props.item.post_content.replace(/[\r\n]+/g, '')
+  .replace(/<\/p>/g, '</p><br>')
+  .replace(/<\/ul>/g, '</ul><br>');// Handle line breaks on different systems
+
+  
+  
+  
 </script>
 
 <template>
-  <div p4 grid="~ cols-[max-content_1fr]" gap-8 items-center ma max-w-300>
+<!-- {{contents2}} -->
+<!-- items-center -->
+  <div p4 grid="~ cols-[max-content_1fr]" gap-8  ma max-w-300>
     <!-- <NuxtImg
       width="400"
       height="600"
@@ -26,7 +55,9 @@ const directors = computed(() => props.item.credits?.crew.filter(person => perso
       transition duration-400 object-cover aspect="10/16"
       :style="{ 'view-transition-name': `item-${props.item.id}` }"
     /> -->
+    
     <NuxtImg
+     class="image"
       width="400"
       height="600"
       format="webp"
@@ -40,9 +71,10 @@ const directors = computed(() => props.item.credits?.crew.filter(person => perso
       <!-- <div v-if="props.item.overview"> -->
         <div>
         <h2 text-3xl mb4>
-          Storyline
+          {{props.item.title_post}}
+          
         </h2>
-        <div op80 v-text="props.item.post_content" />
+        <div op80 v-html="contents" />        
       </div>
 
       <div text-sm op80>
@@ -91,24 +123,7 @@ const directors = computed(() => props.item.credits?.crew.filter(person => perso
               ${{ numberWithCommas(props.item.budget) }}
             </div>
           </template> -->
-          <template >
-            <div>
-              Location
-            </div>
-
-            <div>
-             {{props.item.name}} ({{props.item.parent}})
-            </div>
-          </template>
-           <template >
-            <div>
-              Type
-            </div>
-
-            <div>
-             {{props.item.targetusersegment_value}} 
-            </div>
-          </template>
+        
           <!-- <template v-if="props.item.revenue">
             <div>
               {{ $t('Revenue') }}
@@ -170,3 +185,12 @@ const directors = computed(() => props.item.credits?.crew.filter(person => perso
     </div>
   </div>
 </template>
+<style >
+h1{font-weight: 800;}
+h2{font-weight: 700;}
+h3{font-weight: 600;}
+.image {
+  position: relative; /* Position the image absolutely */
+  top:30px;
+}
+</style>

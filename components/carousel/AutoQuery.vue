@@ -11,6 +11,7 @@ const{data:item} =await useFetch(apiurl+'/blogposts'+'/1?destination='+props.que
 </script>
 
 <template>
+<!-- {{item}} -->
   <CarouselBase>
     <template #title>
       <NuxtLink :to="`/country/${query.title}`">{{ $t(query.title) }} </NuxtLink>

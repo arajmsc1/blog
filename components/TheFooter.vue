@@ -1,20 +1,29 @@
 <template>
   <footer p="y15 x15" flex="~ col gap4">
     <div flex="~ row gap2" items-center my2>
-      <img src="/movies-sm.webp" width="25" height="25" alt="Logo">
+      <!-- <img src="/movies-sm.webp" width="25" height="25" alt="Logo"> -->
       <div text-xl>
-        Our Logo and content
+        Exploring the Tapestry of World Life
       </div>
     </div>
-    <!-- <div flex="~ row gap2" items-center>
-      <div op50 text-sm>
+    <div flex="~ row gap2" items-center>
+      <!-- <div op50 text-sm>
         Made with
-      </div>
-      <a href="https://nuxt.com/" target="_blank" title="Nuxt 3">
-        <IconNuxt3 h5 />
-      </a>
-    </div> -->
-    <!-- <div flex="~ row gap2" items-center>
+      </div> -->
+      <NuxtLink to='/aboutus' >
+        About us
+      </NuxtLink> |
+      <NuxtLink to='/termsConditions' >
+        Terms and Condition
+      </NuxtLink> |
+      <NuxtLink to='/privacyPolicy' >
+        Privacy Policy
+      </NuxtLink> |
+      <NuxtLink to='/cancelPolicy' >
+        Cancel Policy
+      </NuxtLink>
+    </div> 
+     <!-- <div flex="~ row gap2" items-center>
       <p text-true-gray:90 text-sm>
         Data provided by&nbsp;
         <a op100 target="_blank" href="https://www.themoviedb.org/" title="The Movie Database" rel="noopener" n-link-text>
@@ -34,9 +43,9 @@
           github_id: 'nuxt/movies',
         }"
       >
-        <!-- <a href="https://vercel.com" rel="noopener" target="_blank" aria-label="go to vercel">
+         <!-- <a href="https://vercel.com" rel="noopener" target="_blank" aria-label="go to vercel">
           <IconVercel alt="Vercel" />
-        </a> -->
+        </a>  -->
       </ExternalLinks>
 
       <!-- <LanguageSwitcher /> -->
